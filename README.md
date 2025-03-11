@@ -22,7 +22,7 @@
 
 ## Code Example/Issues 🔍
 
-If you have any issues, please let me know in the issues section or directly to sunkabhanu281202@gmail.com
+If you have any issues, please let me know in the issues section or directly to patial2001@gmail.com
 
 ## Installation 💾
 
