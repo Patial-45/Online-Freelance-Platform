@@ -28,7 +28,7 @@ const Login = () => {
     const PostData = async (e) => {
         e.preventDefault();
         const { name, email, phone, password, cpassword } = user;
-        const res = await fetch(process.env.BACKEND_URL+"/register", {
+        const res = await fetch("http://localhost:5000/register", {
             method: "POST",
             headers: {
                 "Content-Type": "application/json"
@@ -92,7 +92,8 @@ const Login = () => {
 
     const loginUser = async (e) => {
         e.preventDefault();
-        const res = await fetch(process.env.BACKEND_URL+'/Login', { 
+        //const url = process.env.NODE_ENV === 'production' ? process.env.BACKEND_URL : "http://localhost:5000";
+        const res = await fetch("http://localhost:5000/Login", { 
             method: "POST",
             headers: {
                 "Content-Type": "application/json"

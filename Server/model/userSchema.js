@@ -74,15 +74,16 @@ userSchema.pre('save', async function (next) {       // Bcoz of 'pre' method, 'n
 //* For generating token
 userSchema.methods.generateAuthToken = async function () {
     try {
-        let token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY)
-        this.tokens = this.tokens.concat({ token: token });
-        await this.save();
-        return token;
+      const token = jwt.sign({ _id: this._id }, process.env.SECRET_KEY);
+      this.tokens = this.tokens.concat({ token });
+      await this.save();
+      return token;
+    } catch (err) {
+      console.log("Error in generateAuthToken:", err);
+      return null;
     }
-    catch (err) {
-        console.log("🚀 ~ file: userSchema.js:83 ~ err", err)
-    }
-}
+  };
+  
 
 //* Collection Creation
 const User = mongoose.model('Users', userSchema)

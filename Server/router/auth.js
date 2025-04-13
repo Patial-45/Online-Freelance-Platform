@@ -67,9 +67,12 @@ router.post('/Login', async (req, res) => {
             // console.log(token);
 
             res.cookie("jwtoken1", token, {
-                expires: new Date(Date.now() + 25892000000),
-                httpOnly: true
-            })
+                httpOnly: true,
+                secure: false, // use true in production with HTTPS
+                sameSite: "Lax", // or 'None' if frontend and backend are on different domains
+                maxAge: 24 * 60 * 60 * 1000 // 1 day
+            });
+            
 
             if (!isMatch) {             // And this to check password
                 res.status(400).json({ error: "Invalid Credentials" });
@@ -89,33 +92,26 @@ router.post('/Login', async (req, res) => {
 });
 
 
-//* Profile Page
 router.get('/profile', authenticate, (req, res) => {
     res.send(req.rootUser);
-})
-
-//* FindJobs Page
-router.get('/Findjobs', authenticate, (req, res) => {
-    res.send(req.rootUser);
-})
-
-//* FindFreelancers Page
-router.get('/FindFreelancer', authenticate, (req, res) => {
-    res.send(req.rootUser);
-})
-
-//* LogOut Page
-router.get('/Logout', (req, res) => {
-    res.clearCookie('jwtoken1', { path: '/' })
-    res.status(200).send('User Logout');
 });
 
-//* Get user data for Home page
+router.get('/Findjobs', authenticate, (req, res) => {
+    res.send(req.rootUser);
+});
+
+router.get('/FindFreelancer', authenticate, (req, res) => {
+    res.send(req.rootUser);
+});
+
 router.get('/getdata', authenticate, (req, res) => {
     console.log('Fetching user Info');
     res.send(req.rootUser);
-})
-
+});
+router.get('/Logout', (req, res) => {
+    res.clearCookie('jwtoken1', { path: '/' });
+    res.status(200).send('User Logout');
+});
 module.exports = router;
 
 

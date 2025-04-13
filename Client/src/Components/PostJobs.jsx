@@ -34,7 +34,7 @@ const PostJobs = () => {
 
     const { title, date, description } = Jobs;
 
-    const res = await fetch(process.env.BACKEND_URL+"/Jobs", {
+    const res = await fetch("http://localhost:5000/Jobs", {
       method: "POST",
       headers: {
         "Content-Type": "application/json",

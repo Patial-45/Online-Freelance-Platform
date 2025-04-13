@@ -27,7 +27,7 @@ const FindFreelancer = () => {
     const callFF = async () => {
 
         try {
-            const res = await fetch(process.env.BACKEND_URL+'/FreelancersFetch', {
+            const res = await fetch('http://localhost:5000/FreelancersFetch', {
                 method: "GET",                        //! IMP
                 headers: {
                     Accept: "application/json",

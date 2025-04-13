@@ -22,7 +22,7 @@ const FilterFreelancer = ({ children }) => {
     const getFreelancer = async () => {
         dispatch({ type: "SET_LOADING" });
         try {
-            const res = await fetch(process.env.BACKEND_URL+"/FreelancersFetch", {
+            const res = await fetch("http://localhost:5000/FreelancersFetch", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",

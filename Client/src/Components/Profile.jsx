@@ -29,7 +29,7 @@ const Profile = () => {
 
   const callProfilePage = async () => {
     try {
-      const res = await fetch(process.env.BACKEND_URL+"/profile", {
+      const res = await fetch("http://localhost:5000/profile", {
         method: "GET", //! IMP
         headers: {
           Accept: "application/json",
@@ -58,7 +58,7 @@ const Profile = () => {
   }, []);
 
   const GetHired = () => {
-    navigate(process.env.BACKEND_URL+"/FindFreelancer/GetHired");
+    navigate("http://localhost:5000/FindFreelancer/GetHired");
   };
   const PostJobs = () => {
     navigate("/FindJobs/PostJobs");
