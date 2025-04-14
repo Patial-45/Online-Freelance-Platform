@@ -1,7 +1,20 @@
-const jwt = require('jsonwebtoken');
+const jwt = require("jsonwebtoken");
 const User = require('../model/userSchema');
 
-const Authenticate = async (req, res, next) => {
+
+const verifyToken = (req, res, next) => {
+    const token = req.cookies.token;
+  
+    if (!token) return res.status(401).json({ message: "Unauthorized" });
+  
+    jwt.verify(token, "secretkey", (err, decoded) => {
+      if (err) return res.status(403).json({ message: "Forbidden" });
+      req.user = decoded;
+      next();
+    });
+  };
+  
+  const Authenticate = async (req, res, next) => {
     try {
         const token = req.cookies.jwtoken1;
         const verifyToken = jwt.verify(token, process.env.SECRET_KEY);
@@ -21,3 +34,4 @@ const Authenticate = async (req, res, next) => {
 };
 
 module.exports = Authenticate;
+module.exports = verifyToken;
