@@ -33,6 +33,7 @@ const Login = () => {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify({
                 name, email, phone, password, cpassword
             })
@@ -98,6 +99,7 @@ const Login = () => {
             headers: {
                 "Content-Type": "application/json"
             },
+            credentials: "include",
             body: JSON.stringify({
                 email: logemail,    
                 password: logpass

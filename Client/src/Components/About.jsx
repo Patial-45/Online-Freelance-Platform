@@ -173,10 +173,10 @@ const About = () => {
               className="about-card"
             >
               <div className="img">
-                <img src="https://ik.imagekit.io/bhanu1776/Freelansters/osama.jpg?updatedAt=1682608749618" alt="" loading="lazy"/>
+                <img src="/" alt="" loading="lazy"/>
               </div>
               <div className="info">
-                <h3>Osama Shaikh</h3>
+                <h3>RAVISH TYAGI</h3>
                 <span>Frontend Developer</span>
               </div>
               <ul className="social">
@@ -192,7 +192,7 @@ const About = () => {
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/osamashaikh_786/"
+                    href="https://www.instagram.com/ravish_tyagi19"
                     className="fab fa-instagram"
                   >
                     <span></span>
@@ -213,16 +213,16 @@ const About = () => {
               className="about-card"
             >
               <div className="img">
-                <img src="https://ik.imagekit.io/bhanu1776/Freelansters/bhanu.jpg?updatedAt=1682608756655" alt="" loading="lazy" />
+                <img src="/" alt="" loading="lazy" />
               </div>
               <div className="info">
-                <h3>Bhanu Sunka</h3>
+                <h3>Sahil Patial</h3>
                 <span>Full Stack Developer</span>
               </div>
               <ul className="social">
                 <li>
                   <a
-                    href="https://github.com/Bhanu1776"
+                    href="https://github.com/Patial-45"
                     className="fab fa-facebook"
                   >
                     <span></span>
@@ -230,7 +230,7 @@ const About = () => {
                 </li>
                 <li>
                   <a
-                    href="https://twitter.com/SunkaBhanu"
+                    href="/"
                     className="fab fa-twitter"
                   >
                     <span></span>
@@ -238,7 +238,7 @@ const About = () => {
                 </li>
                 <li>
                   <a
-                    href="https://www.instagram.com/bhanu_1776/"
+                    href="https://www.instagram.com/sahil_patial45/"
                     className="fab fa-instagram"
                   >
                     <span></span>
@@ -246,7 +246,7 @@ const About = () => {
                 </li>
                 <li>
                   <a
-                    href="https://www.linkedin.com/in/bhanu-sunka-94a24a21a/"
+                    href="/https://www.linkedin.com/in/sahil-patial-45/"
                     className="fab fa-linkedin"
                   >
                     <span></span>
@@ -262,10 +262,10 @@ const About = () => {
               className="about-card"
             >
               <div className="img">
-                <img src="https://ik.imagekit.io/bhanu1776/Freelansters/harsh.jpg?updatedAt=1682608753482" alt="" loading="lazy"/>
+                <img src="/" alt="" loading="lazy"/>
               </div>
               <div className="info">
-                <h3>Harsh Dalvi</h3>
+                <h3>Sahil Patial</h3>
                 <span>Backend Developer</span>
               </div>
               <ul className="social">
@@ -281,7 +281,7 @@ const About = () => {
                 </li>
                 <li>
                   <a
-                    href="/https://www.instagram.com/harsh_97"
+                    href="/https://www.instagram.com/sahil_patial45/"
                     className="fab fa-instagram"
                   >
                     <span></span>

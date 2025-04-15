@@ -113,8 +113,8 @@ const Profile = () => {
                   <CardContent>
                     <Stack direction="row" spacing={2}>
                       <Avatar
-                        alt="osama"
-                        src="https://ik.imagekit.io/bhanu1776/Freelansters/osama.jpg?updatedAt=1682608749618"
+                        alt="Sahil Patial"
+                        src="/"
                         sx={{ width: 56, height: 56 }}
                       />
                     </Stack>

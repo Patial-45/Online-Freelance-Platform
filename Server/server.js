@@ -35,9 +35,9 @@ app.get('/Login', (req, res) => {
     res.send('Hello world from the Login server');
 });
 
-app.get('/register', (req, res) => {
-    res.send('Hello world from the Login server');
-});
+// app.get('/register', (req, res) => {
+    // res.send('Hello world from the Login server');
+// });
 
 // ✅ Protected Route
 app.get('/about', Authenticate, (req, res) => {
