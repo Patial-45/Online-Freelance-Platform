@@ -75,3 +75,5 @@ app.get('/FreelancersFetch', async (req, res) => {
 app.listen(PORT, () => {
     console.log(`Server is running at port no ${PORT}`);
 });
+
+module.exports = app;
