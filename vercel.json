@@ -31,7 +31,8 @@
       "dest": "/Client/assets/$1"
     },
     {
-      "handle": "filesystem"
+      "src": "/(.*\\.(?:js|css|ico|png|jpg|jpeg|svg|webp|woff|woff2|json|txt))",
+      "dest": "/Client/$1"
     },
     {
       "src": "/(.*)",
