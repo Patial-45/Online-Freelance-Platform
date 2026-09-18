@@ -23,7 +23,7 @@ const FilterJobs = ({ children }) => {
     const getJobs = async () => {
         dispatch({ type: "SET_LOADING" });
         try {
-            const res = await fetch("http://localhost:5000/JobsFetch", {
+            const res = await fetch("/api/jobs", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -31,7 +31,7 @@ const FilterJobs = ({ children }) => {
             });
 
             const CardsData = await res.json();
-            const jobs = CardsData.data
+            const jobs = CardsData.data || CardsData;
             dispatch({ type: "SET_API_DATA", payload: jobs });
         } catch (error) {
             dispatch({ type: "API_ERROR" });
@@ -41,14 +41,14 @@ const FilterJobs = ({ children }) => {
     const getSingleJob = async (_id) => {
         dispatch({ type: "SET_SINGLE_LOADING" });
         try {
-            const res = await fetch("http://localhost:5000/JobsFetch", {
+            const res = await fetch(`/api/jobs/${_id}`, {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
                 },
             });
             const SingleCardData = await res.json();
-            const singleJob = SingleCardData.data;
+            const singleJob = SingleCardData.data || SingleCardData;
             dispatch({ type: "SET_SINGLE_JOB", payload: singleJob });
         } catch (error) {
             dispatch({ type: "SET_SINGLE_ERROR" });

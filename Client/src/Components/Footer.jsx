@@ -1,149 +1,178 @@
 import React from "react";
-import styled from "styled-components";
+import { Link } from "react-router-dom";
+import { LuMapPin, LuPhone, LuMail, LuHeart } from "react-icons/lu";
+import { FaGithub, FaLinkedin, FaInstagram } from "react-icons/fa";
 
 const Footer = () => {
-  const Wrapper = styled.section`
-    #foot {
-      position: relative;
-      background-color: #000000;
-      color: var(--shady-white-color);
-      opacity: 0.9;
-      height: 400px;
-      margin-top: 50px;
-    }
-    .center-div {
-      position: relative;
-      width: 269px;
-      height: 235px;
-      top: 114px;
-      left: 500px;
-    }
-    .center-div h3 {
-      font-family: var(--primary-font);
-      font-size: 1.4rem;
-    }
-    .center-div p {
-      position: absolute;
-      font-family: var(--primary-font);
-      font-size: 1.1rem;
-      top: 90px;
-    }
-    #f-title {
-      position: absolute;
-      background: transparent;
-      font-size: 2.5rem;
-      font-family: var(--primary-font);
-      color: #1cd6ce;
-      top: 100px;
-      left: 119px;
-    }
-    .s-loc {
-      position: absolute;
-      top: 202px;
-      left: 133px;
-    }
-    .s-phone {
-      position: absolute;
-      top: 265px;
-      left: 134px;
-    }
-    .s-mail {
-      position: absolute;
-      top: 323px;
-      left: 132px;
-    }
-    .loc {
-      font-family: var(--primary-font);
-      position: absolute;
-      top: 209px;
-      left: 194px;
-    }
-    .phone {
-      font-family: var(--primary-font);
-      position: absolute;
-      top: 265px;
-      left: 194px;
-    }
-    .mail {
-      font-family: var(--primary-font);
-      position: absolute;
-      top: 324px;
-      left: 194px;
-    }
-
-    #copyright {
-      font-family: var(--primary-font);
-      opacity: 0.9;
-      text-align: center;
-      background-color: black;
-      color: var(--shady-white-color);
-    }
-  `;
   return (
-    <>
-      {/* //? Footer */}
-      <Wrapper>
-        <footer id="foot">
-          <h1 id="f-title">Freelanster</h1>
-
-          <p className="loc">Republic of Dombivli</p>
-          <p className="phone">+91 9136281166</p>
-          <p className="mail">Random@gmail.com</p>
-
-          <svg
-            className="s-loc"
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 20 20"
-            height="2.2em"
-            width="1.6em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path
-              fullrule="evenodd"
-              d="M5.05 4.05a7 7 0 119.9 9.9L10 18.9l-4.95-4.95a7 7 0 010-9.9zM10 11a2 2 0 100-4 2 2 0 000 4z"
-              clipRule="evenodd"
-            ></path>
-          </svg>
-          <svg
-            className="s-phone"
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 512 512"
-            height="1.35em"
-            width="1.8em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M497.39 361.8l-112-48a24 24 0 0 0-28 6.9l-49.6 60.6A370.66 370.66 0 0 1 130.6 204.11l60.6-49.6a23.94 23.94 0 0 0 6.9-28l-48-112A24.16 24.16 0 0 0 122.6.61l-104 24A24 24 0 0 0 0 48c0 256.5 207.9 464 464 464a24 24 0 0 0 23.4-18.6l24-104a24.29 24.29 0 0 0-14.01-27.6z"></path>
-          </svg>
-          <svg
-            className="s-mail"
-            stroke="currentColor"
-            fill="currentColor"
-            strokeWidth="0"
-            viewBox="0 0 24 24"
-            height="1.65em"
-            width="2em"
-            xmlns="http://www.w3.org/2000/svg"
-          >
-            <path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"></path>
-          </svg>
-
-          <div className="center-div">
-            <h3>Explore</h3>
-            <p>About Us</p>
+    <footer className="bg-[#0b1320] text-slate-300 text-sm border-t border-slate-800">
+      <div className="max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 pt-16 pb-12">
+        <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-10 lg:gap-8 pb-12 border-b border-slate-800/80">
+          {/* Col 1: VectraWork Brand Title & Contact Info */}
+          <div className="space-y-4">
+            <h2 className="text-3xl font-extrabold text-teal-400 font-sans tracking-tight">
+              VectraWork
+            </h2>
+            <p className="text-xs sm:text-sm text-slate-400 leading-relaxed max-w-sm font-sans">
+              The precision freelance platform connecting clients with extraordinary engineering & creative talent worldwide.
+            </p>
+            <div className="space-y-2.5 pt-2 text-xs sm:text-sm text-slate-300">
+              <div className="flex items-center gap-3">
+                <LuMapPin className="w-4 h-4 text-teal-400 shrink-0" />
+                <span>Solan, Himachal Pradesh, India</span>
+              </div>
+              <div className="flex items-center gap-3">
+                <LuPhone className="w-4 h-4 text-teal-400 shrink-0" />
+                <a href="tel:+919136281166" className="hover:text-teal-400 transition-colors">
+                  +91 9136281166
+                </a>
+              </div>
+              <div className="flex items-center gap-3">
+                <LuMail className="w-4 h-4 text-teal-400 shrink-0" />
+                <a href="mailto:support@vectrawork.com" className="hover:text-teal-400 transition-colors">
+                  support@vectrawork.com
+                </a>
+              </div>
+            </div>
           </div>
-        </footer>
 
-        <main>
-          <div id="copyright">
-            Copyright &copy; www.Freelanster.com. All rights reserved!
+          {/* Col 2: Explore Navigation */}
+          <div>
+            <h3 className="text-base font-bold text-white uppercase tracking-wider mb-4 font-sans">
+              Explore
+            </h3>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              <li>
+                <Link to="/" className="hover:text-teal-400 transition-colors">
+                  Home Overview
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs" className="hover:text-teal-400 transition-colors">
+                  Browse Verified Jobs
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindFreelancer" className="hover:text-teal-400 transition-colors">
+                  Find Top Freelancers
+                </Link>
+              </li>
+              <li>
+                <Link to="/about" className="hover:text-teal-400 transition-colors">
+                  About Our Team
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs/PostJobs" className="hover:text-teal-400 transition-colors">
+                  Post a Job Listing
+                </Link>
+              </li>
+              <li>
+                <Link to="/Terms" className="hover:text-teal-400 transition-colors">
+                  Terms &amp; Conditions
+                </Link>
+              </li>
+            </ul>
           </div>
-        </main>
-      </Wrapper>
-    </>
+
+          {/* Col 3: Popular Categories */}
+          <div>
+            <h3 className="text-base font-bold text-white uppercase tracking-wider mb-4 font-sans">
+              Categories
+            </h3>
+            <ul className="space-y-2.5 text-xs sm:text-sm">
+              <li>
+                <Link to="/FindJobs?category=Graphic%20Design" className="hover:text-teal-400 transition-colors">
+                  Graphic Design
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs?category=Android%20Developer" className="hover:text-teal-400 transition-colors">
+                  Android Development
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs?category=Video%20Editing" className="hover:text-teal-400 transition-colors">
+                  Video Editing
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs?category=Article%20Writing" className="hover:text-teal-400 transition-colors">
+                  Article Writing
+                </Link>
+              </li>
+              <li>
+                <Link to="/FindJobs?category=Accountant" className="hover:text-teal-400 transition-colors">
+                  Accountant & Finance
+                </Link>
+              </li>
+            </ul>
+          </div>
+
+          {/* Col 4: Platform Security & Social */}
+          <div className="space-y-4">
+            <h3 className="text-base font-bold text-white uppercase tracking-wider mb-4 font-sans">
+              Connect With Us
+            </h3>
+            <p className="text-xs text-slate-400 leading-relaxed">
+              Stay updated with new job postings, featured talent spotlights, and platform releases.
+            </p>
+            <div className="flex items-center gap-3 pt-1">
+              <a
+                href="https://github.com/Patial-45"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-white hover:border-teal-400 transition-colors text-base"
+                aria-label="GitHub"
+              >
+                <FaGithub />
+              </a>
+              <a
+                href="https://www.linkedin.com/in/sahil-patial-45/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-teal-400 hover:border-teal-400 transition-colors text-base"
+                aria-label="LinkedIn"
+              >
+                <FaLinkedin />
+              </a>
+              <a
+                href="https://www.instagram.com/sahil_patial45/"
+                target="_blank"
+                rel="noreferrer"
+                className="w-10 h-10 rounded-full bg-slate-900 border border-slate-700/80 flex items-center justify-center text-slate-300 hover:text-pink-400 hover:border-pink-400 transition-colors text-base"
+                aria-label="Instagram"
+              >
+                <FaInstagram />
+              </a>
+            </div>
+            <div className="pt-2">
+              <span className="inline-flex items-center gap-1.5 px-3 py-1 rounded-full bg-teal-500/10 border border-teal-400/20 text-teal-300 text-xs font-semibold">
+                <span className="w-2 h-2 rounded-full bg-teal-400 animate-pulse" />
+                Live on Vercel 2026
+              </span>
+            </div>
+          </div>
+        </div>
+
+        {/* Bottom Copyright Bar */}
+        <div className="pt-8 flex flex-col sm:flex-row items-center justify-between gap-4 text-xs text-slate-400 text-center sm:text-left">
+          <div className="flex flex-wrap items-center justify-center sm:justify-start gap-x-4 gap-y-1">
+            <p>
+              Copyright &copy; www.VectraWork.com. All rights reserved!
+            </p>
+            <Link to="/Terms" className="text-slate-400 hover:text-teal-400 transition-colors underline underline-offset-2">
+              Terms &amp; Conditions
+            </Link>
+          </div>
+          <div className="flex items-center gap-1 text-slate-400">
+            <span>Engineered with</span>
+            <LuHeart className="w-3.5 h-3.5 text-rose-500 fill-rose-500 inline" />
+            <span>by Sahil Patial</span>
+          </div>
+        </div>
+      </div>
+    </footer>
   );
 };
 

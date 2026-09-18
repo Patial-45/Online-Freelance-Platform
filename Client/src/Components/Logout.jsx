@@ -1,37 +1,32 @@
-import React, { useEffect, useContext } from "react";
+import React, { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
-import { UserContext } from "../Routing";
-/* eslint-disable no-unused-vars */
+import { useAuth } from "../context/AuthContext";
 
 const Logout = () => {
-  const { state, dispatch } = useContext(UserContext);
-
+  const { logout } = useAuth();
   const navigate = useNavigate();
 
-  // * Promises
   useEffect(() => {
-    fetch("http://localhost:5000/Logout", {
-      method: "GET",
-      headers: {
-        Accept: "application/json",
-        "Content-Type": "application/json",
-      },
-      credentials: "include",
-    })
-      .then((res) => {
-        dispatch({ type: "USER", payload: false });
-        navigate("/Login");
-        if (!res.status === 200) {
-          const error = new Error(res.error);
-          throw error;
-        }
-      })
-      .catch((err) => {
-        console.log(err);
-      });
-  });
+    const performLogout = async () => {
+      try {
+        await logout();
+      } catch (err) {
+        console.warn("Logout error:", err);
+      } finally {
+        navigate("/");
+      }
+    };
+    performLogout();
+  }, [logout, navigate]);
 
-  return <div>Logout</div>;
+  return (
+    <div className="min-h-screen bg-white flex items-center justify-center font-sans">
+      <div className="flex flex-col items-center gap-3 text-slate-600">
+        <div className="w-8 h-8 border-2 border-teal-600 border-t-transparent rounded-full animate-spin" />
+        <p className="text-sm font-semibold">Signing out safely...</p>
+      </div>
+    </div>
+  );
 };
 
 export default Logout;

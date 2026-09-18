@@ -1,122 +1,45 @@
-import React, { useState } from "react";
-import styled from "styled-components";
+import React from "react";
+import { Link } from "react-router-dom";
+import { LuCompass, LuArrowLeft } from "react-icons/lu";
+import { LuSparkles } from "./Icons";
 
 const Error = () => {
-  const Wrapper = styled.section`
-    @import url("https://fonts.googleapis.com/css?family=Montserrat:400,400i,700");
-
-    .Main-div {
-      width: 100vw;
-      height: 100vh;
-      background-color: #313942;
-    }
-    .Main {
-      align-items: center;
-      display: flex;
-      flex-direction: column;
-      height: 100vh;
-      justify-content: center;
-      text-align: center;
-    }
-
-    .Main-h1 {
-      color: #e7ebf2;
-      font-size: 12.5rem;
-      letter-spacing: 0.1em;
-      margin: 0.025em 0;
-      text-shadow: 0.05em 0.05em 0 rgba(0, 0, 0, 0.25);
-      white-space: nowrap;
-      font-family: "Montserrat", sans-serif;
-      font-weight: bolder;
-    }
-    .Main-span {
-      animation: spooky 2s alternate infinite linear;
-      color: #528cce;
-      display: inline-block;
-    }
-
-    .Main-h2 {
-      color: #e7ebf2;
-      margin-bottom: 0.4em;
-      font-family: "Montserrat", sans-serif;
-      font-weight: bolder;
-    }
-
-    .Main-p {
-      color: #ccc;
-      margin-top: 0;
-      font-family: "Montserrat", sans-serif;
-    }
-
-    @keyframes spooky {
-      from {
-        transform: translatey(0.15em) scaley(0.95);
-      }
-
-      to {
-        transform: translatey(-0.15em);
-      }
-    }
-    .myButton {
-      box-shadow: 0px 10px 14px -7px #276873;
-      background: linear-gradient(to bottom, #6bb3ff 5%, #528cce 100%);
-      background-color: #6bb3ff;
-      border-radius: 8px;
-      display: inline-block;
-      cursor: pointer;
-      color: #ffffff;
-      font-family: Arial;
-      font-size: 20px;
-      font-weight: bold;
-      padding: 7px 56px;
-      text-decoration: none;
-      text-shadow: 0px 1px 0px #3d768a;
-      margin-top: 8px;
-    }
-    .myButton:hover {
-      background: linear-gradient(to bottom, #528cce 5%, #6bb3ff 100%);
-      background-color: #70a7e7;
-    }
-    .myButton:active {
-      position: relative;
-      top: 1px;
-    }
-  `;
-
-  const [loading, setLoading] = useState(true);
-  const preloader = document.getElementById("preloader");
-  if (preloader) {
-    setTimeout(() => {
-      preloader.style.display = "none";
-      setLoading(false);
-    }, 0);
-  }
-
   return (
-    !loading && (
-      <>
-        <Wrapper>
-          <div className="Main-div">
-            <main className="Main">
-              <h1 className="Main-h1">
-                4
-                <span className="Main-span">
-                  <i className="fas fa-ghost"></i>
-                </span>
-                4
-              </h1>
-              <h2 className="Main-h2">Error: 404 page not found</h2>
-              <p className="Main-p">
-                Sorry, the page you're looking for cannot be accessed
-              </p>
-              <a href="/" className="myButton">
-                Home
-              </a>
-            </main>
-          </div>
-        </Wrapper>
-      </>
-    )
+    <div className="min-h-screen bg-[#ffffff] text-slate-900 flex flex-col items-center justify-center px-4 relative overflow-hidden font-sans">
+      <div className="text-center max-w-md space-y-6">
+        <div className="w-20 h-20 rounded-3xl bg-teal-50 border border-teal-200 text-teal-600 flex items-center justify-center mx-auto shadow-md">
+          <LuCompass className="w-10 h-10" />
+        </div>
+
+        <div className="space-y-2">
+          <h1 className="text-6xl sm:text-7xl font-extrabold font-serif text-slate-900 tracking-tight">
+            404
+          </h1>
+          <h2 className="text-xl sm:text-2xl font-bold text-slate-800">
+            Page Beyond the Frontier
+          </h2>
+          <p className="text-sm text-slate-600 leading-relaxed font-medium">
+            The project, specialist profile, or platform route you requested does not exist or has been relocated.
+          </p>
+        </div>
+
+        <div className="pt-2 flex flex-col sm:flex-row items-center justify-center gap-3">
+          <Link
+            to="/"
+            className="w-full sm:w-auto px-6 py-3 rounded-full bg-gradient-to-r from-teal-600 to-cyan-600 hover:from-teal-700 hover:to-cyan-700 text-white font-bold text-sm shadow-sm flex items-center justify-center gap-2 transition-all hover:scale-105"
+          >
+            <LuArrowLeft className="w-4 h-4" />
+            <span>Return to Marketplace</span>
+          </Link>
+          <Link
+            to="/FindJobs"
+            className="w-full sm:w-auto px-6 py-3 rounded-full bg-slate-100 border border-slate-200 hover:bg-slate-200 text-slate-700 font-bold text-sm transition-colors"
+          >
+            Browse Open Roles
+          </Link>
+        </div>
+      </div>
+    </div>
   );
 };
 

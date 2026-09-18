@@ -22,7 +22,7 @@ const FilterFreelancer = ({ children }) => {
     const getFreelancer = async () => {
         dispatch({ type: "SET_LOADING" });
         try {
-            const res = await fetch("http://localhost:5000/FreelancersFetch", {
+            const res = await fetch("/api/freelancers", {
                 method: "GET",
                 headers: {
                     "Content-Type": "application/json",
@@ -30,9 +30,8 @@ const FilterFreelancer = ({ children }) => {
             });
 
             const FreelancerData = await res.json();
-            const freelancer = FreelancerData.data
+            const freelancer = FreelancerData.data || FreelancerData;
             dispatch({ type: "SET_API_DATA", payload: freelancer });
-            console.log(freelancer);
         } catch (error) {
             dispatch({ type: "API_ERROR" });
         }

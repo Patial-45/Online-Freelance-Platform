@@ -1,147 +1,72 @@
-import React from "react";
-import styled from "styled-components";
+import React, { useState } from "react";
+import { useNavigate, useLocation } from "react-router-dom";
+import { LuSearch, LuArrowRight } from "react-icons/lu";
 
-const Hero = (props) => {
-  const Wrapper = styled.section`
-    section.static {
-      position: relative;
-      width: 99.3vw;
-      height: 100vh;
-      display: flex;
-      justify-content: center;
-      align-items: center;
-      top: 0;
-    }
-    section.static::before {
-      content: " ";
-      position: absolute;
-      background-image: ${props.img};
-      background-repeat: no-repeat;
-      background-position: center center;
-      background-size: cover;
-      background-attachment: fixed;
-      height: 100%;
-      width: 100%;
-      filter: brightness(50%);
-    }
-    section.static h1 {
-      font-family: "Noto Serif Georgian", serif;
-      font-size: 4rem;
-      text-align: center;
-      color: var(--shady-white-color);
-    }
-    .static p {
-      font-family: "Cormorant Garamond", serif;
-      font-size: 1.4em;
+const Hero = ({ title, desc, img, placeholder, searchPath }) => {
+  const [searchQuery, setSearchQuery] = useState("");
+  const navigate = useNavigate();
+  const location = useLocation();
 
-      text-align: center;
-      color: var(--shady-white-color);
+  const handleSearch = (e) => {
+    e.preventDefault();
+    const isFreelancers = location.pathname.toLowerCase().includes("freelancer");
+    const targetPath = searchPath || (isFreelancers ? "/FindFreelancer" : "/FindJobs");
+    if (searchQuery.trim()) {
+      navigate(`${targetPath}?search=${encodeURIComponent(searchQuery.trim())}`);
+    } else {
+      navigate(targetPath);
     }
-    .textArea {
-      position: absolute;
-      width: 60vw;
-    }
+  };
 
-    .wrapper {
-      width: 100%;
-      max-width: 31.25rem;
-      margin: 3rem auto;
-    }
+  const bgStyle = img 
+    ? { backgroundImage: img.startsWith("url") ? img : `url(${img})` }
+    : { backgroundImage: `url("https://images.unsplash.com/photo-1498354178607-a79df2916198?auto=format&fit=crop&w=1920&q=80")` };
 
-    .label {
-      font-size: 0.625rem;
-      font-weight: 400;
-      text-transform: uppercase;
-      letter-spacing: +1.3px;
-      margin-bottom: 1rem;
-    }
-
-    .searchBar {
-      width: 110%;
-      display: flex;
-      flex-direction: row;
-      align-items: center;
-      margin-left: -20px;
-    }
-
-    #searchQueryInput {
-      width: 100%;
-      height: 3.1rem;
-      background: #edf0f0;
-      outline: none;
-      border: none;
-      border-radius: 1.625rem;
-      padding: 0 3.5rem 0 1.5rem;
-      font-size: 1rem;
-    }
-
-    #searchQuerySubmit {
-      width: 5.4rem;
-      height: 2.7rem;
-      margin-left: -5.6rem;
-      border-radius: 1.625rem;
-      background: #00c8aa;
-      outline: none;
-      border: none;
-      font-family: var(--primary-font);
-      font-weight: bold;
-      color: #272727;
-    }
-
-    #searchQuerySubmit:hover {
-      cursor: pointer;
-    }
-  `;
   return (
-    <>
-      <Wrapper>
-        <section className="static">
-          <div className="textArea">
-            <h1
-              data-aos="fade-down"
-              data-duration="2000"
-              data-aos-delay="400"
-              data-aos-easing="ease-in-out"
-            >
-              {props.title}
-            </h1>
-            <br />
-            <p
-              data-aos="fade-up"
-              data-duration="2000"
-              data-aos-delay="400"
-              data-aos-easing="ease-in-out"
-            >
-              {props.desc}
-            </p>
-            <div className="wrapper">
-              <div
-                data-aos="zoom-in"
-                data-duration="2000"
-                data-aos-delay="400"
-                data-aos-easing="ease-in-out"
-                className="searchBar"
-              >
-                <input
-                  id="searchQueryInput"
-                  type="text"
-                  name="searchQueryInput"
-                  placeholder={props.placeholder}
-                />
-                {/* </form> */}
-                <button
-                  id="searchQuerySubmit"
-                  type="submit"
-                  name="searchQuerySubmit"
-                >
-                  Search
-                </button>
-              </div>
+    <section 
+      className="relative pt-32 pb-20 md:pt-40 md:pb-28 overflow-hidden bg-slate-900 bg-cover bg-center"
+      style={bgStyle}
+    >
+      {/* Dark overlay for contrast */}
+      <div className="absolute inset-0 bg-slate-950/70 backdrop-blur-[2px]" />
+
+      <div className="max-w-5xl mx-auto px-4 sm:px-6 lg:px-8 text-center relative z-10 space-y-6">
+        {/* Title */}
+        <h1 className="text-3xl sm:text-5xl md:text-6xl font-extrabold tracking-tight text-white font-serif drop-shadow-md">
+          {title || "Find Jobs"}
+        </h1>
+
+        {/* Subtitle */}
+        <p className="text-base sm:text-xl text-teal-100/90 max-w-2xl mx-auto font-sans font-medium drop-shadow">
+          {desc || "The Best Place where you can find jobs and hire extraordinary talent."}
+        </p>
+
+        {/* Search Bar with Authentic Teal Submit Button */}
+        <div className="pt-4 max-w-2xl mx-auto">
+          <form
+            onSubmit={handleSearch}
+            className="flex items-center p-1.5 rounded-full bg-white shadow-2xl border border-slate-200/80 transition-all focus-within:ring-2 focus-within:ring-teal-500"
+          >
+            <div className="pl-4 pr-2 text-slate-400">
+              <LuSearch className="w-5 h-5 text-teal-600" />
             </div>
-          </div>
-        </section>
-      </Wrapper>
-    </>
+            <input
+              type="text"
+              value={searchQuery}
+              onChange={(e) => setSearchQuery(e.target.value)}
+              placeholder={placeholder || "Find Jobs..."}
+              className="w-full bg-transparent border-none text-slate-900 placeholder-slate-400 text-sm sm:text-base focus:outline-none px-2"
+            />
+            <button
+              type="submit"
+              className="px-6 py-2.5 sm:py-3 rounded-full bg-gradient-to-r from-teal-500 to-cyan-400 hover:from-teal-600 hover:to-cyan-500 text-slate-950 font-bold text-xs sm:text-sm tracking-wide transition-all shadow-md hover:scale-105 active:scale-95 shrink-0"
+            >
+              Search
+            </button>
+          </form>
+        </div>
+      </div>
+    </section>
   );
 };
 

@@ -1,0 +1,364 @@
+@tailwind base;
+@tailwind components;
+@tailwind utilities;
+
+@layer base {
+  :root {
+    --shady-white-color: #f5f5f5;
+    --accent-color: #1cd6ce;
+    --brand-primary: #0d9488;
+    --brand-accent: #14b8a6;
+    --brand-cyan: #06b6d4;
+    --section-font: "Plus Jakarta Sans", sans-serif;
+    --primary-font: "PT Serif", serif;
+  }
+
+  html {
+    scroll-behavior: smooth;
+    font-family: 'Plus Jakarta Sans', 'Inter', system-ui, sans-serif;
+  }
+
+  body {
+    background-color: #ffffff;
+    color: #0f172a;
+    overflow-x: hidden;
+  }
+}
+
+/* Progress bar in navbar on scroll */
+.progressbar {
+  position: fixed;
+  top: 0;
+  left: 0;
+  width: 100%;
+  height: 3.5px;
+  background: transparent;
+  z-index: 9999;
+}
+
+.progressbarIn {
+  height: 100%;
+  background: linear-gradient(90deg, #0d9488 0%, #14b8a6 50%, #06b6d4 100%);
+  box-shadow: 0 0 10px rgba(13, 148, 136, 0.5);
+  transition: width 0.1s ease-out;
+}
+
+/* Custom 2026 Light Scrollbar */
+::-webkit-scrollbar {
+  width: 8px;
+  height: 8px;
+}
+
+::-webkit-scrollbar-track {
+  background: #f8fafc;
+}
+
+::-webkit-scrollbar-thumb {
+  background: #cbd5e1;
+  border-radius: 9999px;
+  border: 2px solid #f8fafc;
+}
+
+::-webkit-scrollbar-thumb:hover {
+  background: #0d9488;
+}
+
+/* Swiper Parallax & Hero Carousel */
+.hero-swiper {
+  width: 100%;
+  height: 86vh;
+  min-height: 580px;
+  border-radius: 24px;
+  overflow: hidden;
+}
+
+.hero-swiper .swiper-slide {
+  position: relative;
+  display: flex;
+  justify-content: center;
+  align-items: center;
+  background: #0f172a;
+  overflow: hidden;
+}
+
+.hero-swiper .parallax-bg {
+  position: absolute;
+  left: 0;
+  top: 0;
+  width: 130%;
+  height: 100%;
+}
+
+.hero-swiper .parallax-bg img {
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  filter: brightness(65%);
+}
+
+/* Tagline Typewriter Animation */
+.typewriter-text {
+  overflow: hidden;
+  white-space: nowrap;
+  display: inline-block;
+  position: relative;
+  animation: typewriter 7s steps(30, end) infinite;
+}
+
+.typewriter-text::after {
+  content: "|";
+  position: absolute;
+  right: -8px;
+  color: #14b8a6;
+  animation: caret 1s steps(1, end) infinite;
+}
+
+@keyframes typewriter {
+  0%, 15% { width: 0; }
+  35%, 80% { width: 100%; }
+  90%, 100% { width: 0; }
+}
+
+@keyframes caret {
+  0%, 100% { opacity: 0; }
+  50% { opacity: 1; }
+}
+
+/* Bouncing Scroll Down Indicator */
+.scroll-indicator span {
+  display: block;
+  width: 20px;
+  height: 20px;
+  border-right: 2.5px solid #0d9488;
+  border-bottom: 2.5px solid #0d9488;
+  transform: rotate(45deg);
+  margin: -8px auto;
+  animation: scrollDownBounce 2s infinite ease-in-out;
+}
+
+.scroll-indicator span:nth-child(2) {
+  animation-delay: -0.2s;
+}
+
+@keyframes scrollDownBounce {
+  0% {
+    opacity: 0;
+    transform: rotate(45deg) translate(-10px, -10px);
+  }
+  50% {
+    opacity: 1;
+  }
+  100% {
+    opacity: 0;
+    transform: rotate(45deg) translate(10px, 10px);
+  }
+}
+
+/* 3D Coverflow CateCards */
+.catecards-slider {
+  width: 100% !important;
+  min-height: 520px !important;
+  padding: 1.5rem 0 3.5rem 0 !important;
+  position: relative !important;
+  overflow: visible !important;
+}
+
+.catecards-slider .swiper-wrapper {
+  display: flex !important;
+  align-items: center !important;
+  min-height: 460px !important;
+}
+
+.catecards-slide,
+.swiper .swiper-slide.catecards-slide,
+.swiper-slide.catecards-slide {
+  width: 320px !important;
+  max-width: 320px !important;
+  height: 440px !important;
+  min-height: 440px !important;
+  flex-shrink: 0 !important;
+  background: transparent !important;
+  border-radius: 2rem !important;
+  display: flex !important;
+  justify-content: center !important;
+  align-items: center !important;
+  box-sizing: border-box !important;
+}
+
+.catecards-card {
+  position: relative !important;
+  width: 320px !important;
+  height: 440px !important;
+  min-height: 440px !important;
+  border-radius: 2rem !important;
+  overflow: hidden !important;
+  background-size: cover !important;
+  background-position: center !important;
+  background-repeat: no-repeat !important;
+  box-shadow: 0 16px 36px -12px rgba(0, 0, 0, 0.25) !important;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.5s ease !important;
+  display: flex !important;
+  flex-direction: column !important;
+  justify-content: flex-end !important;
+}
+
+.catecards-card:hover,
+.swiper-slide-active .catecards-card {
+  transform: scale(1.04) !important;
+  box-shadow: 0 24px 48px -12px rgba(13, 148, 136, 0.4) !important;
+}
+
+.catecards-content {
+  position: relative !important;
+  width: 100% !important;
+  padding: 1.75rem 1.5rem 1.5rem !important;
+  background: linear-gradient(
+    180deg,
+    rgba(15, 23, 42, 0) 0%,
+    rgba(15, 23, 42, 0.65) 20%,
+    rgba(15, 23, 42, 0.96) 100%
+  ) !important;
+  color: #ffffff !important;
+  transform: translateY(62%) !important;
+  transition: transform 0.5s cubic-bezier(0.16, 1, 0.3, 1) !important;
+  box-sizing: border-box !important;
+}
+
+.catecards-card:hover .catecards-content,
+.swiper-slide-active .catecards-card .catecards-content {
+  transform: translateY(0) !important;
+}
+
+.catecards-title {
+  position: relative !important;
+  display: inline-block !important;
+  color: #ffffff !important;
+  font-size: 1.35rem !important;
+  font-weight: 700 !important;
+  letter-spacing: -0.01em !important;
+}
+
+.catecards-title::after {
+  content: "" !important;
+  position: absolute !important;
+  left: 0 !important;
+  bottom: -4px !important;
+  width: 100% !important;
+  height: 3px !important;
+  background: #0d9488 !important;
+  border-radius: 2px !important;
+  transform: scaleX(0) !important;
+  transform-origin: left !important;
+  transition: transform 0.4s ease-in-out !important;
+}
+
+.catecards-card:hover .catecards-title::after,
+.swiper-slide-active .catecards-card .catecards-title::after {
+  transform: scaleX(1) !important;
+}
+
+.catecards-body {
+  color: #f1f5f9 !important;
+  font-size: 0.85rem !important;
+  line-height: 1.5 !important;
+  margin-top: 0.75rem !important;
+  margin-bottom: 1.1rem !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease-in-out 0.05s !important;
+  text-shadow: 0 1px 3px rgba(0, 0, 0, 0.6) !important;
+}
+
+.catecards-card:hover .catecards-body,
+.swiper-slide-active .catecards-card .catecards-body {
+  opacity: 1 !important;
+}
+
+.catecards-btn {
+  display: inline-flex !important;
+  align-items: center !important;
+  gap: 0.5rem !important;
+  background-color: #0f766e !important;
+  color: #ffffff !important;
+  font-weight: 700 !important;
+  font-size: 0.85rem !important;
+  padding: 0.55rem 1.35rem !important;
+  border-radius: 0.6rem !important;
+  opacity: 0 !important;
+  transition: opacity 0.4s ease-in-out 0.1s, transform 0.25s ease, background-color 0.25s ease, box-shadow 0.25s ease !important;
+  cursor: pointer !important;
+  box-shadow: 0 4px 14px rgba(15, 118, 110, 0.28) !important;
+  border: 1px solid rgba(255, 255, 255, 0.15) !important;
+}
+
+.catecards-card:hover .catecards-btn,
+.swiper-slide-active .catecards-card .catecards-btn {
+  opacity: 1 !important;
+}
+
+.catecards-btn:hover {
+  background-color: #115e59 !important;
+  color: #ffffff !important;
+  transform: translateY(-2px) !important;
+  box-shadow: 0 6px 18px rgba(15, 118, 110, 0.38) !important;
+}
+
+.catecards-slider .swiper-pagination {
+  bottom: 0px !important;
+  position: relative !important;
+  margin-top: 1rem !important;
+}
+
+.catecards-slider .swiper-pagination-bullet {
+  background: #94a3b8 !important;
+  opacity: 0.5 !important;
+  transition: all 0.3s ease !important;
+}
+
+.catecards-slider .swiper-pagination-bullet-active {
+  background: #1cd6ce !important;
+  opacity: 1 !important;
+  width: 24px !important;
+  border-radius: 9999px !important;
+}
+
+/* Glassmorphism utility for light mode */
+.glass-panel-light {
+  background: rgba(255, 255, 255, 0.88);
+  backdrop-filter: blur(16px);
+  -webkit-backdrop-filter: blur(16px);
+  border: 1px solid rgba(13, 148, 136, 0.18);
+  box-shadow: 0 10px 30px -10px rgba(13, 148, 136, 0.08);
+}
+
+.glass-card-light {
+  background: rgba(255, 255, 255, 0.95);
+  backdrop-filter: blur(12px);
+  -webkit-backdrop-filter: blur(12px);
+  border: 1px solid rgba(226, 232, 240, 0.9);
+  transition: all 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+}
+
+.glass-card-light:hover {
+  border-color: rgba(13, 148, 136, 0.4);
+  transform: translateY(-3px);
+  box-shadow: 0 12px 28px -10px rgba(0, 0, 0, 0.08), 0 0 20px -5px rgba(13, 148, 136, 0.15);
+}
+
+/* Floating Decorative Shapes Physics */
+@keyframes floatSlow {
+  0%, 100% { transform: translateY(0px) rotate(0deg); }
+  50% { transform: translateY(-14px) rotate(3deg); }
+}
+
+@keyframes floatBounce {
+  0%, 100% { transform: translate(0, 0); }
+  50% { transform: translate(8px, -12px); }
+}
+
+.animate-float-slow {
+  animation: floatSlow 6s ease-in-out infinite;
+}
+
+.animate-float-bounce {
+  animation: floatBounce 5s ease-in-out infinite;
+}

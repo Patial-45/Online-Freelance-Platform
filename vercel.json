@@ -1,27 +1,41 @@
 {
-    "version": 2,
-    "builds": [
-      {
-        "src": "client/package.json",
-        "use": "@vercel/static-build",
-        "config": {
-          "distDir": "build"
-        }
-      },
-      {
-        "src": "server/server.js",   
-        "use": "@vercel/node"
+  "version": 2,
+  "builds": [
+    {
+      "src": "Client/package.json",
+      "use": "@vercel/static-build",
+      "config": {
+        "distDir": "dist"
       }
-    ],
-    "routes": [
-      {
-        "src": "/api/(.*)",
-        "dest": "/server/server.js"  
-      },
-      {
-        "src": "/(.*)",
-        "dest": "/client/$1"
-      }
-    ]
-  }
-  
+    },
+    {
+      "src": "Server/server.js",
+      "use": "@vercel/node"
+    }
+  ],
+  "routes": [
+    {
+      "src": "/api/(.*)",
+      "dest": "/Server/server.js"
+    },
+    {
+      "src": "/JobsFetch",
+      "dest": "/Server/server.js"
+    },
+    {
+      "src": "/FreelancersFetch",
+      "dest": "/Server/server.js"
+    },
+    {
+      "src": "/assets/(.*)",
+      "dest": "/Client/assets/$1"
+    },
+    {
+      "handle": "filesystem"
+    },
+    {
+      "src": "/(.*)",
+      "dest": "/Client/index.html"
+    }
+  ]
+}

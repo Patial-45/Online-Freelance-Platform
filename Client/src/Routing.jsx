@@ -1,72 +1,88 @@
-import React, { createContext, useReducer } from "react";
-import { BrowserRouter, Routes, Route } from "react-router-dom";
-import { initialState, reducer } from "./reducer/UseReducer";
+import React, { useEffect } from "react";
+import { BrowserRouter, Routes, Route, useLocation } from "react-router-dom";
+import { AuthProvider } from "./context/AuthContext";
 import App from "./App";
 import Login from "./Login";
-import FindJobs from "./FindJobs";
 import Logout from "./Components/Logout";
-import Error from "./Components/Error";
-import PostJobs from "./Components/PostJobs";
+import FindJobs from "./FindJobs";
 import SingleJob from "./Components/SingleJob";
-import Profile from "./Components/Profile";
-import GetHired from "./Components/GetHired";
+import PostJobs from "./Components/PostJobs";
 import FindFreelancer from "./FindFreelancer";
+import Profile from "./Components/Profile";
+import Terms from "./Components/Terms";
+import Error from "./Components/Error";
 
-// const App = lazy(() => import("./App"));
-// const Login = lazy(() => import("./Login"));
-// const Error = lazy(() => import("./Components/Error"));
-// const PostJobs = lazy(() => import("./Components/PostJobs"));
-// const SingleJob = lazy(() => import("./Components/SingleJob"));
-// const Profile = lazy(() => import("./Components/Profile"));
-// const GetHired = lazy(() => import("./Components/GetHired"));
+const ScrollToTop = () => {
+  const { pathname } = useLocation();
 
-// Context API
-export const UserContext = createContext();
+  useEffect(() => {
+    window.scrollTo(0, 0);
+  }, [pathname]);
+
+  return null;
+};
 
 const Paths = () => {
   return (
-    // <Suspense fallback={<h1> </h1>}>
     <Routes>
-      <Route exact path="/" element={<App />}></Route>
-      <Route exact path="/Logout" element={<Logout />}></Route>
-      <Route path="/Home" element={<App />}></Route>
-      <Route exact path="/Login1" element={<Login />}></Route>
-      <Route path="/Home/Login1" element={<Login />}></Route>
-      <Route path="/Home/Logout" element={<Logout />}></Route>
-      <Route path="Login" element={<Login />}></Route>
-      <Route path="/FindJobs" element={<FindJobs />}></Route>
-      <Route path="/FindJobs/:id" element={<SingleJob />}></Route>
-      <Route path="/FindJobs/Profile" element={<Profile />}></Route>
-      <Route path="/FindJobs/Profile/Home" element={<App />}></Route>
-      <Route path="/FindJobs/Logout" element={<Logout />}></Route>
-      <Route path="/FindJobs/Home" element={<App />}></Route>
-      <Route path="/FindJobs/PostJobs" element={<PostJobs />}></Route>
-      <Route path="/FindFreelancer" element={<FindFreelancer />}></Route>
-      <Route path="/FindFreelancer/Login" element={<Login />}></Route>
-      <Route path="/FindFreelancer/Home" element={<App />}></Route>
-      <Route path="/FindFreelancer/GetHired" element={<GetHired />}></Route>
-      <Route path="/FindFreelancer/Profile" element={<Profile />}></Route>
-      <Route path="/FindFreelancer/Profile/Home" element={<App />}></Route>
-      <Route path="/FindFreelancer/Logout" element={<Logout />}></Route>
+      {/* Home */}
+      <Route path="/" element={<App />} />
+      <Route path="/home" element={<App />} />
+      <Route path="/Home" element={<App />} />
+      <Route path="/about" element={<App />} />
 
-      <Route path="/Logout" element={<Logout />}></Route>
-      <Route path="*" element={<Error />}></Route>
+      {/* Jobs */}
+      <Route path="/FindJobs" element={<FindJobs />} />
+      <Route path="/findjobs" element={<FindJobs />} />
+      <Route path="/jobs" element={<FindJobs />} />
+      
+      <Route path="/FindJobs/:id" element={<SingleJob />} />
+      <Route path="/jobs/:id" element={<SingleJob />} />
+      
+      <Route path="/FindJobs/PostJobs" element={<PostJobs />} />
+      <Route path="/postjobs" element={<PostJobs />} />
+      <Route path="/PostJobs" element={<PostJobs />} />
+      <Route path="/postjob" element={<PostJobs />} />
+      <Route path="/post-job" element={<PostJobs />} />
+
+      {/* Freelancers */}
+      <Route path="/FindFreelancer" element={<FindFreelancer />} />
+      <Route path="/findfreelancer" element={<FindFreelancer />} />
+      <Route path="/freelancers" element={<FindFreelancer />} />
+      <Route path="/FindFreelancer/GetHired" element={<PostJobs />} />
+
+      {/* Profile & User */}
+      <Route path="/profile" element={<Profile />} />
+      <Route path="/Profile" element={<Profile />} />
+      <Route path="/FindJobs/Profile" element={<Profile />} />
+      <Route path="/FindFreelancer/Profile" element={<Profile />} />
+
+      {/* Auth */}
+      <Route path="/login" element={<Login />} />
+      <Route path="/Login" element={<Login />} />
+      <Route path="/Login1" element={<Login />} />
+      <Route path="/register" element={<Login />} />
+      <Route path="/Logout" element={<Logout />} />
+      <Route path="/logout" element={<Logout />} />
+
+      {/* Legal */}
+      <Route path="/Terms" element={<Terms />} />
+      <Route path="/terms" element={<Terms />} />
+
+      {/* 404 Catch-All */}
+      <Route path="*" element={<Error />} />
     </Routes>
-    // </Suspense>
   );
 };
 
 const Routing = () => {
-  const [state, dispatch] = useReducer(reducer, initialState);
-
   return (
-    <>
-      <UserContext.Provider value={{ state, dispatch }}>
-        <BrowserRouter>
-          <Paths />
-        </BrowserRouter>
-      </UserContext.Provider>
-    </>
+    <AuthProvider>
+      <BrowserRouter>
+        <ScrollToTop />
+        <Paths />
+      </BrowserRouter>
+    </AuthProvider>
   );
 };
 

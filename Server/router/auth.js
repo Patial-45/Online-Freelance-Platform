@@ -11,107 +11,157 @@ const User = require('../model/userSchema');
 //     res.send('Hello world from the router js');
 // })
 
-// SingUp Route
-
+// Register Route
 router.post('/register', async (req, res) => {
-
-    const { name, email, phone, password, cpassword, special, time, price, description, img, reviews, stars } = req.body;
-
-    //* Better way of implementation ... trim() method usually removes all the empty spaces from start and end of the string.
-    // name = name.trim(); email = email.trim(); phone = phone.trim(); password = password.trim(); cpassword = cpassword.trim();
-
-    if (!name || !email || !phone || !password || !cpassword) {             // If user doesn't fill any of the values then it will simply return error
-        return res.status(422).json({ error: "Pls fill all the values properly!" });
-    }
-
-
     try {
-        const userExist = await User.findOne({ email: email });                 // left one is database email and right one is input email!!
+        const { name, email, phone, password, cpassword, role, title, special, time, price, description, skills, img } = req.body;
+
+        if (!name || !email || !password) {
+            return res.status(422).json({ error: "Please provide name, email, and password." });
+        }
+
+        if (cpassword && password !== cpassword) {
+            return res.status(422).json({ error: "Passwords do not match." });
+        }
+
+        const normalizedEmail = email.toLowerCase().trim();
+        const userExist = await User.findOne({ email: normalizedEmail });
 
         if (userExist) {
-            return res.status(422).json({ error: "Email already Exist" });
+            return res.status(422).json({ error: "Email already registered." });
         }
-        // eslint-disable-next-line eqeqeq
-        else if (password != cpassword) {
-            return res.status(422).json({ error: "Password didn't match" });
-        }
-        else {
-            const user = new User({ name, email, phone, password, cpassword, special, time, price, description, img, reviews, stars });
-            // Hashing the password will occur here!
-            await user.save();
-            res.status(201).json({ message: "User registered successfully" })
-        }
+
+        const user = new User({
+            name: name.trim(),
+            email: normalizedEmail,
+            phone: phone || "",
+            password,
+            role: role || "freelancer",
+            title: title || (role === "client" ? "Hiring Manager" : "Freelance Specialist"),
+            special: special || "",
+            time: time || "Flexible",
+            price: price || 50,
+            description: description || "",
+            skills: Array.isArray(skills) ? skills : (skills ? skills.split(",").map(s => s.trim()) : []),
+            img: img || "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80"
+        });
+
+        await user.save();
+        const token = await user.generateAuthToken();
+
+        const isProduction = process.env.NODE_ENV === "production";
+        res.cookie("jwtoken1", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        return res.status(201).json({
+            message: "User registered successfully",
+            token,
+            user: {
+                _id: user._id,
+                name: user.name,
+                email: user.email,
+                role: user.role,
+                title: user.title,
+                img: user.img,
+                skills: user.skills
+            }
+        });
+    } catch (err) {
+        console.error("Registration error:", err);
+        return res.status(500).json({ error: "Registration failed. Please try again.", details: err.message });
     }
-    catch (err) {
-        console.log("🚀 ~ file: auth.js:47 ~ router.post ~ err", err)
-    }
-})
+});
 
 // Login Route
-
 router.post('/Login', async (req, res) => {
-
     try {
         const { email, password } = req.body;
 
-        if (!email || !password) {                                          // If both fields are empty
-            return res.status(400).json({ error: "Please Fill the Data!!" });
+        if (!email || !password) {
+            return res.status(400).json({ error: "Please enter both email and password." });
         }
 
-        const userLogin = await User.findOne({ email: email });
+        const normalizedEmail = email.toLowerCase().trim();
+        const userLogin = await User.findOne({ email: normalizedEmail });
 
-        if (userLogin) {                // This condition is to check email
+        if (!userLogin) {
+            return res.status(400).json({ error: "Invalid Credentials" });
+        }
 
-            const isMatch = await bcrypt.compare(password, userLogin.password);
-            const token = await userLogin.generateAuthToken();
-            // console.log(token);
+        // Verify password BEFORE generating or sending token
+        const isMatch = await bcrypt.compare(password, userLogin.password);
+        if (!isMatch) {
+            return res.status(400).json({ error: "Invalid Credentials" });
+        }
 
-            res.cookie("jwtoken1", token, {
-                httpOnly: true,
-                secure: false, // use true in production with HTTPS
-                sameSite: "Lax", // or 'None' if frontend and backend are on different domains
-                maxAge: 24 * 60 * 60 * 1000 // 1 day
-            });
-            
+        const token = await userLogin.generateAuthToken();
 
-            if (!isMatch) {             // And this to check password
-                res.status(400).json({ error: "Invalid Credentials" });
-            } else {
-                res.json({ message: "User SignIn Successfully " })
+        const isProduction = process.env.NODE_ENV === "production";
+        res.cookie("jwtoken1", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+        res.cookie("token", token, {
+            httpOnly: true,
+            secure: isProduction,
+            sameSite: isProduction ? "none" : "lax",
+            maxAge: 7 * 24 * 60 * 60 * 1000
+        });
+
+        return res.status(200).json({
+            message: "User SignIn Successfully",
+            token,
+            user: {
+                _id: userLogin._id,
+                name: userLogin.name,
+                email: userLogin.email,
+                role: userLogin.role,
+                title: userLogin.title,
+                img: userLogin.img,
+                skills: userLogin.skills,
+                price: userLogin.price,
+                stars: userLogin.stars,
+                reviews: userLogin.reviews
             }
-        }
-        else {
-            res.status(400).json({ error: "Invalid Credentials" });
-        }
-
-
-    }
-    catch (err) {
-        console.log("🚀 ~ file: auth.js:88 ~ router.post ~ err", err)
+        });
+    } catch (err) {
+        console.error("Login error:", err);
+        return res.status(500).json({ error: "Login failed. Please try again.", details: err.message });
     }
 });
 
-
+// User Profile / Current User routes
 router.get('/profile', authenticate, (req, res) => {
-    res.send(req.rootUser);
-});
-
-router.get('/Findjobs', authenticate, (req, res) => {
-    res.send(req.rootUser);
-});
-
-router.get('/FindFreelancer', authenticate, (req, res) => {
-    res.send(req.rootUser);
+    return res.status(200).json({
+        success: true,
+        user: req.rootUser
+    });
 });
 
 router.get('/getdata', authenticate, (req, res) => {
-    console.log('Fetching user Info');
-    res.send(req.rootUser);
+    return res.status(200).json(req.rootUser);
 });
+
+router.get('/Findjobs', authenticate, (req, res) => {
+    return res.status(200).json(req.rootUser);
+});
+
+router.get('/FindFreelancer', authenticate, (req, res) => {
+    return res.status(200).json(req.rootUser);
+});
+
 router.get('/Logout', (req, res) => {
     res.clearCookie('jwtoken1', { path: '/' });
-    res.status(200).send('User Logout');
+    res.clearCookie('token', { path: '/' });
+    return res.status(200).json({ message: "User Logout Successfully" });
 });
+
 module.exports = router;
 
 

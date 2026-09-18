@@ -1,218 +1,118 @@
-import React from "react";
-import styled from "styled-components";
-import { AiFillMessage, AiOutlineClockCircle } from "react-icons/ai";
-import ProStars from "./ProStars";
-import FormatPrice from "../Helpers/FormatPrice";
+﻿import React from "react";
+import { LuStar, LuClock, LuShieldCheck, LuMapPin, LuMessageSquare, LuCalendar } from "react-icons/lu";
 
-const ProfileCards = (props) => {
+const ProfileCards = ({ freelancer, onBook, onMessage }) => {
+  const f = freelancer || {};
+  const {
+    _id,
+    name = "Elena Rostova",
+    title = "Senior Product Designer",
+    special = "UI/UX & Design Systems",
+    price = 85,
+    time = "Available 30h/wk",
+    img = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80",
+    stars = 5.0,
+    reviews = 42,
+    skills = ["Figma", "UI/UX", "Design Systems", "Prototyping"],
+    location = "Remote / Worldwide",
+    description = "Senior specialist dedicated to delivering scalable, high-impact results with obsessive attention to craft."
+  } = f;
+
   return (
-    <>
-      <Wrapper>
-        <div
-          data-aos="fade-up"
-          data-duration="2000"
-          data-aos-offset="150"
-          data-aos-anchor-placement="top-bottom"
-          data-aos-easing="ease-in-out"
-          className="jobs"
-        >
-          <div className="profile-cards">
-            <div className="profile-content">
-              <div className="profile-speciality">{props.proSpecial}</div>
+    <div className="group relative flex flex-col justify-between p-6 rounded-2xl bg-white border border-slate-200/90 hover:border-teal-500/50 transition-all duration-300 hover:-translate-y-1 hover:shadow-xl hover:shadow-teal-500/10 shadow-xs">
+      <div>
+        {/* Header: Avatar, Name & Rating */}
+        <div className="flex items-start gap-4 mb-4">
+          <div className="relative">
+            <img
+              src={img}
+              alt={name}
+              className="w-16 h-16 rounded-2xl object-cover border-2 border-slate-200 group-hover:border-teal-500 transition-colors shadow-sm"
+              onError={(e) => {
+                e.target.src = "https://images.unsplash.com/photo-1534528741775-53994a69daeb?auto=format&fit=crop&w=400&q=80";
+              }}
+              loading="lazy"
+            />
+            <div className="absolute -bottom-1 -right-1 p-1 bg-teal-600 rounded-full text-white shadow-xs" title="Verified Specialist">
+              <LuShieldCheck className="w-3 h-3" />
+            </div>
+          </div>
 
-              <div className="time-price">
-                <div className="profile-time">
-                  <AiOutlineClockCircle className="icon" />
-                  {props.proTime}
-                </div>
-                <div className="profile-price">
-                  <FormatPrice price={parseInt(props.proPrice)} />
-                </div>
+          <div className="flex-1 min-w-0">
+            <div className="flex items-center justify-between gap-1">
+              <h3 className="text-base font-bold text-slate-900 group-hover:text-teal-700 transition-colors truncate font-sans">
+                {name}
+              </h3>
+              <div className="flex items-center gap-1 text-xs font-bold text-amber-600 bg-amber-50 px-2 py-0.5 rounded-md border border-amber-200">
+                <LuStar className="w-3 h-3 fill-amber-500" />
+                <span>{Number(stars).toFixed(1)}</span>
               </div>
+            </div>
 
-              <div className="profile-img-name">
-                <div className="profile-img">
-                  <img src={props.proImg} alt="" loading="lazy"/>
-                </div>
-                <div>
-                  <div className="profile-name-stars">
-                    <div className="profile-name">{props.proName}</div>
-                    <div className="profile-stars">
-                      <ProStars stars={props.proStars} />
-                    </div>
-                  </div>
-
-                  <div className="profile-connection">
-                    <button>See Profile</button>
-                    <button>
-                      <AiFillMessage className="icon" />
-                    </button>
-                  </div>
-                </div>
-              </div>
-
-              <div className="card-break"></div>
-              <div className="profile-reviews">
-                {props.proReviews} Customer Reviews
-              </div>
-              <button className="profile-book">BOOK NOW</button>
+            <p className="text-xs font-semibold text-teal-700 truncate mt-0.5">{special || title}</p>
+            <div className="flex items-center gap-1 text-[11px] text-slate-500 mt-1 font-medium">
+              <LuMapPin className="w-3 h-3 text-slate-400" />
+              <span className="truncate">{location}</span>
             </div>
           </div>
         </div>
-      </Wrapper>
-    </>
+
+        {/* Short Bio */}
+        <p className="text-xs text-slate-600 line-clamp-2 leading-relaxed mb-4">
+          {description}
+        </p>
+
+        {/* Skills Pills */}
+        <div className="flex flex-wrap gap-1.5 mb-5">
+          {skills.slice(0, 3).map((skill, idx) => (
+            <span
+              key={idx}
+              className="px-2.5 py-0.5 rounded-md bg-slate-100 text-[11px] font-semibold text-slate-700 border border-slate-200/70"
+            >
+              {skill}
+            </span>
+          ))}
+          {skills.length > 3 && (
+            <span className="px-2 py-0.5 rounded-md bg-slate-50 text-[11px] text-slate-500 border border-slate-200/60">
+              +{skills.length - 3}
+            </span>
+          )}
+        </div>
+      </div>
+
+      {/* Footer Details & CTAs */}
+      <div className="pt-4 border-t border-slate-100 space-y-3">
+        <div className="flex items-center justify-between text-xs">
+          <div>
+            <span className="text-slate-500">Rate: </span>
+            <span className="text-sm font-bold text-slate-900">${price}/hr</span>
+          </div>
+          <div className="flex items-center gap-1 text-slate-500 font-medium">
+            <LuClock className="w-3.5 h-3.5 text-teal-600" />
+            <span>{time}</span>
+          </div>
+        </div>
+
+        <div className="flex items-center gap-2">
+          <button
+            onClick={() => onBook && onBook(f)}
+            className="flex-1 py-2.5 px-4 rounded-xl bg-teal-50 hover:bg-teal-100 border border-teal-200 text-teal-800 text-xs font-bold flex items-center justify-center gap-1.5 transition-all shadow-xs"
+          >
+            <LuCalendar className="w-3.5 h-3.5 text-teal-600" />
+            <span>Book Consultation</span>
+          </button>
+
+          <button
+            onClick={() => onMessage && onMessage(f)}
+            className="p-2.5 rounded-xl bg-slate-100 hover:bg-slate-200 border border-slate-200 text-slate-600 hover:text-slate-900 transition-colors"
+            title="Message Specialist"
+          >
+            <LuMessageSquare className="w-4 h-4" />
+          </button>
+        </div>
+      </div>
+    </div>
   );
 };
-
-const Wrapper = styled.section`
-  .profile-cards {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    background-color: #fffafa;
-    padding: 5px 20px;
-    margin: 10px 0px;
-    border-radius: 20px 20px;
-    box-shadow: 0px 0px 3.6px rgba(0, 0, 0, 0.017),
-      0px 0px 10px rgba(0, 0, 0, 0.025), 0px 0px 24.1px rgba(0, 0, 0, 0.033),
-      0px 0px 80px rgba(0, 0, 0, 0.05);
-    transition: 150ms;
-  }
-
-  .profile-cards:hover {
-    box-shadow: rgba(0, 0, 0, 0.35) 0px 5px 15px;
-    transform: scale(1.02);
-    transition-timing-function: ease-in-out;
-  }
-
-  .profile-speciality {
-    margin: 20px -10px;
-    padding: 0px 27px;
-    font-family: "Roboto", "Sans Serif";
-    font-weight: bold;
-    font-size: 1.1rem;
-  }
-
-  .profile-time {
-    color: #5e5d5d;
-    padding: 0px 4px;
-    font-family: "Roboto", "Sans Serif";
-    font-size: 15px;
-  }
-  .profile-price {
-    font-size: 18px;
-    font-weight: bold;
-    color: #5e5d5d;
-    padding-right: 16px;
-  }
-  .profile-time .icon {
-    width: 2em;
-    height: 1.5em;
-  }
-
-  .time-price {
-    display: flex;
-    justify-content: space-between;
-    align-items: flex-end;
-    flex-direction: row;
-    flex-flow: row;
-    padding: 0px 10px;
-    margin: 18px 0px;
-  }
-
-  .profile-img img {
-    width: 70px;
-    height: 70px;
-    border: 1px solid black;
-    border-radius: 100%;
-    object-fit: fill;
-    margin-left: 17px;
-  }
-
-  .profile-img-name {
-    display: flex;
-    justify-content: flex-start;
-    align-items: center;
-    flex-direction: row;
-  }
-
-  .profile-name {
-    margin: 0px 15px;
-    font-weight: bold;
-    color: #3f3d3d;
-    font-size: 1.1rem;
-  }
-
-  .profile-name-stars {
-    display: flex;
-    justify-content: center;
-    align-items: center;
-    flex-direction: row;
-    flex-flow: row;
-    margin-bottom: 10px;
-  }
-
-  .profile-connection {
-    display: flex;
-    justify-content: flex-start;
-    align-content: space-between;
-    flex-direction: row;
-    margin-top: 10px;
-  }
-
-  .profile-connection {
-  }
-
-  .profile-connection button {
-    margin-left: 12px;
-    padding: 2px 11px;
-    background-color: transparent;
-    border-radius: 20px;
-    font-family: "Roboto", "Sans Serif";
-    font-size: 0.9rem;
-  }
-
-  .profile-connection .icon {
-    width: 3em;
-    height: 1.6em;
-  }
-
-  .card-break {
-    width: inherit;
-    height: 1px;
-    background-color: grey;
-    margin-top: 15px;
-    margin-bottom: 30px;
-  }
-
-  .profile-reviews {
-    margin: -18px 13px 22px 10px;
-    padding-left: 10px;
-  }
-
-  .profile-book {
-    width: inherit;
-    height: 30px;
-    display: flex;
-    justify-items: center;
-    align-items: center;
-    padding: 1px 160px;
-    margin: 10px;
-    border-radius: 20px 20px;
-    border: none;
-    color: white;
-    background-color: #019a50;
-    font-family: "Roboto", "Sans Serif";
-    font-size: 0.9rem;
-    margin-bottom: 17px;
-    box-shadow: 5px 11px 30px #70cda0;
-    height: 34px;
-  }
-
-  .icon {
-    size: 10%;
-  }
-`;
 
 export default ProfileCards;

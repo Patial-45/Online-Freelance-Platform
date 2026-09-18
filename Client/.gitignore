@@ -5,6 +5,12 @@
 /.pnp
 .pnp.js
 
+# production
+/dist
+dist
+/build
+build
+
 # testing
 /coverage
 .env

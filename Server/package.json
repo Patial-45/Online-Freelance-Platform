@@ -1,46 +1,32 @@
 {
-  "name": "freelansters",
-  "version": "1.0.0",
-  "description": "Backend for Freelansters",
+  "name": "freelansters-server",
+  "version": "2.0.0",
+  "description": "Production Backend API for Freelansters Platform",
   "main": "server.js",
   "scripts": {
-    "start": "node --env-file=.env  server.js"
-  },
-  "repository": {
-    "type": "git",
-    "url": "git+https://github.com/Bhanu1776/Freelansters"
+    "start": "node server.js",
+    "dev": "nodemon server.js"
   },
   "keywords": [
     "Express",
     "Mongodb",
-    "NodeJS"
+    "NodeJS",
+    "Freelancers",
+    "API"
   ],
-  "author": "Bhanu1776",
+  "author": "Sahil Patial",
   "license": "MIT",
-  "bugs": {
-    "url": "https://github.com/Bhanu1776/Freelansters/issues"
-  },
-  "homepage": "https://github.com/Bhanu1776/Freelansters/#readme",
   "dependencies": {
-    "axios": "^1.4.0",
+    "axios": "^1.6.2",
     "bcryptjs": "^2.4.3",
     "cookie-parser": "^1.4.7",
     "cors": "^2.8.5",
+    "dotenv": "^16.3.1",
     "express": "^4.18.2",
-    "http-proxy-middleware": "^2.0.6",
     "jsonwebtoken": "^9.0.2",
-    "mongoose": "^7.8.6",
-    "node-latest": "^4.0.1",
-    "nodemon": "^2.0.22",
-    "npm": "^9.7.1",
-    "react": "^18.2.0",
-    "react-dom": "^18.2.0",
-    "react-router-dom": "^6.13.0",
-    "react-scripts": "^5.0.1",
-    "update": "^0.7.4",
-    "web-vitals": "^3.3.2"
+    "mongoose": "^7.8.6"
   },
   "devDependencies": {
-    "dotenv": "^16.3.1"
+    "nodemon": "^2.0.22"
   }
 }
