@@ -1,6 +1,7 @@
 import React from "react";
 import { FaGithub, FaLinkedin, FaInstagram, FaTwitter } from "react-icons/fa";
 import { LuShieldCheck } from "react-icons/lu";
+import sahilPatialImg from "../Img/sahil_patial.jpg";
 
 const About = () => {
   return (
@@ -30,16 +31,16 @@ const About = () => {
             </div>
 
             {/* Circular Avatar with Interactive Hover Aura Scale */}
-            <div className="relative mx-auto w-36 h-36 mb-6">
-              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-500/25 to-cyan-400/25 scale-125 group-hover:scale-150 transition-transform duration-700 -z-0 blur-xs" />
+            <div className="relative mx-auto w-40 h-40 mb-6">
+              <div className="absolute inset-0 rounded-full bg-gradient-to-tr from-teal-500/30 to-cyan-400/30 scale-125 group-hover:scale-150 transition-transform duration-700 -z-0 blur-xs" />
               <img
-                src="https://github.com/Patial-45.png"
+                src={sahilPatialImg}
                 onError={(e) => {
                   e.target.onerror = null;
-                  e.target.src = "https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?auto=format&fit=crop&w=400&q=80";
+                  e.target.src = "/sahil_patial.jpg";
                 }}
-                alt="Sahil Patial"
-                className="relative z-10 w-full h-full rounded-full object-cover border-4 border-white shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:border-teal-100"
+                alt="Sahil Patial - Software Engineer & Founder"
+                className="relative z-10 w-full h-full rounded-full object-cover object-[center_18%] border-4 border-white shadow-xl transition-all duration-500 group-hover:scale-105 group-hover:border-teal-200"
                 loading="lazy"
               />
             </div>
