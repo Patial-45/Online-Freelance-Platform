@@ -1,6 +1,6 @@
 <div align="center">
 
-# ⚡ VectraWork (formerly Freelansters)
+# ⚡ VectraWork
 ### The Precision Freelance & Engineering Marketplace — 2026 Overhaul
 
 [![Vite 8](https://img.shields.io/badge/Vite-8.3.0-646CFF?style=for-the-badge&logo=vite&logoColor=white)](https://vitejs.dev/)
